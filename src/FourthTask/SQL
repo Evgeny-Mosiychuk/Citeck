@@ -1,0 +1,18 @@
+a. Задание выполнялось на PostgreSQL 9.6
+
+b.
+CREATE TABLE numbers (
+  values INTEGER NOT NULL UNIQUE
+  );
+
+INSERT INTO numbers (values)
+  VALUES (1), (2), (4), (7), (8), (11), (16) , (18);
+
+c.
+
+SELECT values+1 as first_value, next_values-(values+1) as count
+FROM(
+  SELECT values, LEAD(values)OVER(ORDER BY Values)as next_values
+  FROM numbers
+)T
+WHERE values+1 <> next_values
